@@ -1,9 +1,10 @@
 import { Client, registry, MissingWalletError } from 'runos_chain-client-ts'
 
+import { Config } from "runos_chain-client-ts/runos_chain.configstore/types"
 import { Params } from "runos_chain-client-ts/runos_chain.configstore/types"
 
 
-export { Params };
+export { Config, Params };
 
 function initClient(vuexGetters) {
 	return new Client(vuexGetters['common/env/getEnv'], vuexGetters['common/wallet/signer'])
@@ -35,8 +36,11 @@ function getStructure(template) {
 const getDefaultState = () => {
 	return {
 				Params: {},
+				Config: {},
+				ConfigAll: {},
 				
 				_Structure: {
+						Config: getStructure(Config.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						
 		},
@@ -71,6 +75,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.Params[JSON.stringify(params)] ?? {}
+		},
+				getConfig: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.Config[JSON.stringify(params)] ?? {}
+		},
+				getConfigAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ConfigAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -123,6 +139,54 @@ export default {
 				return getters['getParams']( { params: {...key}, query}) ?? {}
 			} catch (e) {
 				throw new Error('QueryClient:QueryParams API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryConfig({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.RunosChainConfigstore.query.queryConfig( key.index)).data
+				
+					
+				commit('QUERY', { query: 'Config', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryConfig', payload: { options: { all }, params: {...key},query }})
+				return getters['getConfig']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryConfig API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryConfigAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.RunosChainConfigstore.query.queryConfigAll(query ?? undefined)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await client.RunosChainConfigstore.query.queryConfigAll({...query ?? {}, 'pagination.key':(<any> value).pagination.next_key} as any)).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ConfigAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryConfigAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getConfigAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryConfigAll API Node Unavailable. Could not perform query: ' + e.message)
 				
 			}
 		},

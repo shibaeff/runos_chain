@@ -9,10 +9,40 @@
  * ---------------------------------------------------------------
  */
 
+export interface ConfigstoreConfig {
+  index?: string;
+
+  /** @format uint64 */
+  dpid?: string;
+  mac?: string;
+
+  /** @format uint64 */
+  inPort?: string;
+}
+
 /**
  * Params defines the parameters for the module.
  */
 export type ConfigstoreParams = object;
+
+export interface ConfigstoreQueryAllConfigResponse {
+  config?: ConfigstoreConfig[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
+export interface ConfigstoreQueryGetConfigResponse {
+  config?: ConfigstoreConfig;
+}
 
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -31,6 +61,78 @@ export interface RpcStatus {
   code?: number;
   message?: string;
   details?: ProtobufAny[];
+}
+
+/**
+* message SomeRequest {
+         Foo some_parameter = 1;
+         PageRequest pagination = 2;
+ }
+*/
+export interface V1Beta1PageRequest {
+  /**
+   * key is a value returned in PageResponse.next_key to begin
+   * querying the next page most efficiently. Only one of offset or key
+   * should be set.
+   * @format byte
+   */
+  key?: string;
+
+  /**
+   * offset is a numeric offset that can be used when key is unavailable.
+   * It is less efficient than using key. Only one of offset or key should
+   * be set.
+   * @format uint64
+   */
+  offset?: string;
+
+  /**
+   * limit is the total number of results to be returned in the result page.
+   * If left empty it will default to a value to be set by each app.
+   * @format uint64
+   */
+  limit?: string;
+
+  /**
+   * count_total is set to true  to indicate that the result set should include
+   * a count of the total number of items available for pagination in UIs.
+   * count_total is only respected when offset is used. It is ignored when key
+   * is set.
+   */
+  count_total?: boolean;
+
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
+  reverse?: boolean;
+}
+
+/**
+* PageResponse is to be embedded in gRPC response messages where the
+corresponding request message has used PageRequest.
+
+ message SomeResponse {
+         repeated Bar results = 1;
+         PageResponse page = 2;
+ }
+*/
+export interface V1Beta1PageResponse {
+  /**
+   * next_key is the key to be passed to PageRequest.key to
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
+   * @format byte
+   */
+  next_key?: string;
+
+  /**
+   * total is total number of results available if PageRequest.count_total
+   * was set, its value is undefined otherwise
+   * @format uint64
+   */
+  total?: string;
 }
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
@@ -154,10 +256,52 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title runoschain/configstore/genesis.proto
+ * @title runoschain/configstore/config.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryConfigAll
+   * @summary Queries a list of Config items.
+   * @request GET:/runos_chain/configstore/config
+   */
+  queryConfigAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<ConfigstoreQueryAllConfigResponse, RpcStatus>({
+      path: `/runos_chain/configstore/config`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryConfig
+   * @summary Queries a Config by index.
+   * @request GET:/runos_chain/configstore/config/{index}
+   */
+  queryConfig = (index: string, params: RequestParams = {}) =>
+    this.request<ConfigstoreQueryGetConfigResponse, RpcStatus>({
+      path: `/runos_chain/configstore/config/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

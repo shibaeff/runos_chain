@@ -1,0 +1,13 @@
+syntax = "proto3";
+package runos_chain.configstore;
+
+option go_package = "runos_chain/x/configstore/types";
+
+message Config {
+  string index = 1; 
+  uint64 dpid = 2; 
+  string mac = 3; 
+  uint64 inPort = 4; 
+  
+}
+
