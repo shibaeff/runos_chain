@@ -20,6 +20,8 @@ export interface ConfigstoreConfig {
   inPort?: string;
 }
 
+export type ConfigstoreMsgSetPortResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
