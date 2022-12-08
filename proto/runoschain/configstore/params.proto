@@ -1,0 +1,12 @@
+syntax = "proto3";
+package runos_chain.configstore;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "runos_chain/x/configstore/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
