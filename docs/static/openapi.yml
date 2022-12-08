@@ -73920,6 +73920,8 @@ definitions:
       inPort:
         type: string
         format: uint64
+  runos_chain.configstore.MsgGetPortResponse:
+    type: object
   runos_chain.configstore.MsgSetPortResponse:
     type: object
   runos_chain.configstore.Params:

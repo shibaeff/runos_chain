@@ -28,6 +28,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSetPort int = 100
 
+	opWeightMsgGetPort = "op_weight_msg_get_port"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgGetPort int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -71,6 +75,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgSetPort,
 		configstoresimulation.SimulateMsgSetPort(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgGetPort int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgGetPort, &weightMsgGetPort, nil,
+		func(_ *rand.Rand) {
+			weightMsgGetPort = defaultWeightMsgGetPort
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgGetPort,
+		configstoresimulation.SimulateMsgGetPort(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

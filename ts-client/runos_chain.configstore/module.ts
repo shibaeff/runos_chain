@@ -8,9 +8,10 @@ import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
 import { MsgSetPort } from "./types/runoschain/configstore/tx";
+import { MsgGetPort } from "./types/runoschain/configstore/tx";
 
 
-export { MsgSetPort };
+export { MsgSetPort, MsgGetPort };
 
 type sendMsgSetPortParams = {
   value: MsgSetPort,
@@ -18,9 +19,19 @@ type sendMsgSetPortParams = {
   memo?: string
 };
 
+type sendMsgGetPortParams = {
+  value: MsgGetPort,
+  fee?: StdFee,
+  memo?: string
+};
+
 
 type msgSetPortParams = {
   value: MsgSetPort,
+};
+
+type msgGetPortParams = {
+  value: MsgGetPort,
 };
 
 
@@ -55,12 +66,34 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgGetPort({ value, fee, memo }: sendMsgGetPortParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgGetPort: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgGetPort({ value: MsgGetPort.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgGetPort: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		
 		msgSetPort({ value }: msgSetPortParams): EncodeObject {
 			try {
 				return { typeUrl: "/runos_chain.configstore.MsgSetPort", value: MsgSetPort.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgSetPort: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgGetPort({ value }: msgGetPortParams): EncodeObject {
+			try {
+				return { typeUrl: "/runos_chain.configstore.MsgGetPort", value: MsgGetPort.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgGetPort: Could not create message: ' + e.message)
 			}
 		},
 		

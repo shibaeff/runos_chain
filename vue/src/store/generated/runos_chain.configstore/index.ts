@@ -205,6 +205,19 @@ export default {
 				}
 			}
 		},
+		async sendMsgGetPort({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const client=await initClient(rootGetters)
+				const result = await client.RunosChainConfigstore.tx.sendMsgGetPort({ value, fee: {amount: fee, gas: "200000"}, memo })
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgGetPort:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgGetPort:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		
 		async MsgSetPort({ rootGetters }, { value }) {
 			try {
@@ -216,6 +229,19 @@ export default {
 					throw new Error('TxClient:MsgSetPort:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgSetPort:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgGetPort({ rootGetters }, { value }) {
+			try {
+				const client=initClient(rootGetters)
+				const msg = await client.RunosChainConfigstore.tx.msgGetPort({value})
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgGetPort:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgGetPort:Create Could not create message: ' + e.message)
 				}
 			}
 		},

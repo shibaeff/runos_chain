@@ -14,6 +14,15 @@ export interface MsgSetPort {
 export interface MsgSetPortResponse {
 }
 
+export interface MsgGetPort {
+  creator: string;
+  dpid: number;
+  mac: string;
+}
+
+export interface MsgGetPortResponse {
+}
+
 function createBaseMsgSetPort(): MsgSetPort {
   return { creator: "", dpid: 0, mac: "", inPort: 0 };
 }
@@ -129,10 +138,117 @@ export const MsgSetPortResponse = {
   },
 };
 
+function createBaseMsgGetPort(): MsgGetPort {
+  return { creator: "", dpid: 0, mac: "" };
+}
+
+export const MsgGetPort = {
+  encode(message: MsgGetPort, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.dpid !== 0) {
+      writer.uint32(16).uint64(message.dpid);
+    }
+    if (message.mac !== "") {
+      writer.uint32(26).string(message.mac);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGetPort {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGetPort();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.dpid = longToNumber(reader.uint64() as Long);
+          break;
+        case 3:
+          message.mac = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgGetPort {
+    return {
+      creator: isSet(object.creator) ? String(object.creator) : "",
+      dpid: isSet(object.dpid) ? Number(object.dpid) : 0,
+      mac: isSet(object.mac) ? String(object.mac) : "",
+    };
+  },
+
+  toJSON(message: MsgGetPort): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.dpid !== undefined && (obj.dpid = Math.round(message.dpid));
+    message.mac !== undefined && (obj.mac = message.mac);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgGetPort>, I>>(object: I): MsgGetPort {
+    const message = createBaseMsgGetPort();
+    message.creator = object.creator ?? "";
+    message.dpid = object.dpid ?? 0;
+    message.mac = object.mac ?? "";
+    return message;
+  },
+};
+
+function createBaseMsgGetPortResponse(): MsgGetPortResponse {
+  return {};
+}
+
+export const MsgGetPortResponse = {
+  encode(_: MsgGetPortResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgGetPortResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGetPortResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgGetPortResponse {
+    return {};
+  },
+
+  toJSON(_: MsgGetPortResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgGetPortResponse>, I>>(_: I): MsgGetPortResponse {
+    const message = createBaseMsgGetPortResponse();
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   SetPort(request: MsgSetPort): Promise<MsgSetPortResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  GetPort(request: MsgGetPort): Promise<MsgGetPortResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -140,11 +256,18 @@ export class MsgClientImpl implements Msg {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.SetPort = this.SetPort.bind(this);
+    this.GetPort = this.GetPort.bind(this);
   }
   SetPort(request: MsgSetPort): Promise<MsgSetPortResponse> {
     const data = MsgSetPort.encode(request).finish();
     const promise = this.rpc.request("runos_chain.configstore.Msg", "SetPort", data);
     return promise.then((data) => MsgSetPortResponse.decode(new _m0.Reader(data)));
+  }
+
+  GetPort(request: MsgGetPort): Promise<MsgGetPortResponse> {
+    const data = MsgGetPort.encode(request).finish();
+    const promise = this.rpc.request("runos_chain.configstore.Msg", "GetPort", data);
+    return promise.then((data) => MsgGetPortResponse.decode(new _m0.Reader(data)));
   }
 }
 

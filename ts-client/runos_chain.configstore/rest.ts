@@ -20,6 +20,8 @@ export interface ConfigstoreConfig {
   inPort?: string;
 }
 
+export type ConfigstoreMsgGetPortResponse = object;
+
 export type ConfigstoreMsgSetPortResponse = object;
 
 /**

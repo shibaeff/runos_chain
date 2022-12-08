@@ -8,6 +8,7 @@ option go_package = "runos_chain/x/configstore/types";
 // Msg defines the Msg service.
 service Msg {
       rpc SetPort(MsgSetPort) returns (MsgSetPortResponse);
+  rpc GetPort(MsgGetPort) returns (MsgGetPortResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -19,6 +20,15 @@ message MsgSetPort {
 }
 
 message MsgSetPortResponse {
+}
+
+message MsgGetPort {
+  string creator = 1;
+  uint64 dpid = 2;
+  string mac = 3;
+}
+
+message MsgGetPortResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
