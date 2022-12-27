@@ -34,6 +34,15 @@ export interface QueryAllHostsDatabaseResponse {
   pagination: PageResponse | undefined;
 }
 
+export interface QueryGetPortRequest {
+  dpid: string;
+  mac: string;
+}
+
+export interface QueryGetPortResponse {
+  inport: string;
+}
+
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
@@ -348,6 +357,108 @@ export const QueryAllHostsDatabaseResponse = {
   },
 };
 
+function createBaseQueryGetPortRequest(): QueryGetPortRequest {
+  return { dpid: "", mac: "" };
+}
+
+export const QueryGetPortRequest = {
+  encode(message: QueryGetPortRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.dpid !== "") {
+      writer.uint32(10).string(message.dpid);
+    }
+    if (message.mac !== "") {
+      writer.uint32(18).string(message.mac);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetPortRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetPortRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.dpid = reader.string();
+          break;
+        case 2:
+          message.mac = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetPortRequest {
+    return { dpid: isSet(object.dpid) ? String(object.dpid) : "", mac: isSet(object.mac) ? String(object.mac) : "" };
+  },
+
+  toJSON(message: QueryGetPortRequest): unknown {
+    const obj: any = {};
+    message.dpid !== undefined && (obj.dpid = message.dpid);
+    message.mac !== undefined && (obj.mac = message.mac);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetPortRequest>, I>>(object: I): QueryGetPortRequest {
+    const message = createBaseQueryGetPortRequest();
+    message.dpid = object.dpid ?? "";
+    message.mac = object.mac ?? "";
+    return message;
+  },
+};
+
+function createBaseQueryGetPortResponse(): QueryGetPortResponse {
+  return { inport: "" };
+}
+
+export const QueryGetPortResponse = {
+  encode(message: QueryGetPortResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.inport !== "") {
+      writer.uint32(10).string(message.inport);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGetPortResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryGetPortResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.inport = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetPortResponse {
+    return { inport: isSet(object.inport) ? String(object.inport) : "" };
+  },
+
+  toJSON(message: QueryGetPortResponse): unknown {
+    const obj: any = {};
+    message.inport !== undefined && (obj.inport = message.inport);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryGetPortResponse>, I>>(object: I): QueryGetPortResponse {
+    const message = createBaseQueryGetPortResponse();
+    message.inport = object.inport ?? "";
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -356,6 +467,8 @@ export interface Query {
   HostsDatabase(request: QueryGetHostsDatabaseRequest): Promise<QueryGetHostsDatabaseResponse>;
   /** Queries a list of HostsDatabase items. */
   HostsDatabaseAll(request: QueryAllHostsDatabaseRequest): Promise<QueryAllHostsDatabaseResponse>;
+  /** Queries a list of GetPort items. */
+  GetPort(request: QueryGetPortRequest): Promise<QueryGetPortResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -365,6 +478,7 @@ export class QueryClientImpl implements Query {
     this.Params = this.Params.bind(this);
     this.HostsDatabase = this.HostsDatabase.bind(this);
     this.HostsDatabaseAll = this.HostsDatabaseAll.bind(this);
+    this.GetPort = this.GetPort.bind(this);
   }
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
@@ -382,6 +496,12 @@ export class QueryClientImpl implements Query {
     const data = QueryAllHostsDatabaseRequest.encode(request).finish();
     const promise = this.rpc.request("runos_chain.configstore.Query", "HostsDatabaseAll", data);
     return promise.then((data) => QueryAllHostsDatabaseResponse.decode(new _m0.Reader(data)));
+  }
+
+  GetPort(request: QueryGetPortRequest): Promise<QueryGetPortResponse> {
+    const data = QueryGetPortRequest.encode(request).finish();
+    const promise = this.rpc.request("runos_chain.configstore.Query", "GetPort", data);
+    return promise.then((data) => QueryGetPortResponse.decode(new _m0.Reader(data)));
   }
 }
 

@@ -48,6 +48,10 @@ export interface ConfigstoreQueryGetHostsDatabaseResponse {
   hostsDatabase?: ConfigstoreHostsDatabase;
 }
 
+export interface ConfigstoreQueryGetPortResponse {
+  inport?: string;
+}
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
@@ -264,6 +268,22 @@ export class HttpClient<SecurityDataType = unknown> {
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryGetPort
+   * @summary Queries a list of GetPort items.
+   * @request GET:/runos_chain/configstore/get_port/{dpid}/{mac}
+   */
+  queryGetPort = (dpid: string, mac: string, params: RequestParams = {}) =>
+    this.request<ConfigstoreQueryGetPortResponse, RpcStatus>({
+      path: `/runos_chain/configstore/get_port/${dpid}/${mac}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *

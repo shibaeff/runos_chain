@@ -44308,6 +44308,47 @@ paths:
           format: uint64
       tags:
         - Query
+  /runos_chain/configstore/get_port/{dpid}/{mac}:
+    get:
+      summary: Queries a list of GetPort items.
+      operationId: RunosChainConfigstoreGetPort
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              inport:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: dpid
+          in: path
+          required: true
+          type: string
+        - name: mac
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /runos_chain/configstore/hosts_database:
     get:
       summary: Queries a list of HostsDatabase items.
@@ -73985,6 +74026,11 @@ definitions:
             type: string
           creator:
             type: string
+  runos_chain.configstore.QueryGetPortResponse:
+    type: object
+    properties:
+      inport:
+        type: string
   runos_chain.configstore.QueryParamsResponse:
     type: object
     properties:

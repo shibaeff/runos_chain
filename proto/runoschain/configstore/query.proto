@@ -26,6 +26,11 @@ service Query {
 		option (google.api.http).get = "/runos_chain/configstore/hosts_database";
 	}
 
+// Queries a list of GetPort items.
+	rpc GetPort(QueryGetPortRequest) returns (QueryGetPortResponse) {
+		option (google.api.http).get = "/runos_chain/configstore/get_port/{dpid}/{mac}";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -55,6 +60,15 @@ message QueryAllHostsDatabaseRequest {
 message QueryAllHostsDatabaseResponse {
 	repeated HostsDatabase hostsDatabase = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetPortRequest {
+  string dpid = 1;
+  string mac = 2;
+}
+
+message QueryGetPortResponse {
+  string inport = 1;
 }
 
 // this line is used by starport scaffolding # 3
