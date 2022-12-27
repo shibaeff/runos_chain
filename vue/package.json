@@ -9,6 +9,7 @@
     "buffer": "^6.0.3",
     "core-js": "^3.18.2",
     "runos_chain-client-ts": "file:../ts-client",
+    "shibaeff-runos_chain-client-ts": "file:../ts-client",
     "vue": "^3.2.6",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.2"

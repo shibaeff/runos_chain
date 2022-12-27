@@ -9,6 +9,7 @@ require (
 	github.com/cosmos/ibc-go/v5 v5.0.0
 	github.com/gogo/protobuf v1.3.3
 	github.com/golang/protobuf v1.5.2
+	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
 	github.com/ignite/cli v0.25.1
 	github.com/spf13/cast v1.5.0
@@ -100,7 +101,6 @@ require (
 	github.com/googleapis/enterprise-certificate-proxy v0.2.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.7.0 // indirect
 	github.com/gorilla/handlers v1.5.1 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/gsterjov/go-libsecret v0.0.0-20161001094733-a6f4afe4910c // indirect
