@@ -1,8 +1,10 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
+import RunosChainConfigstore from './runos_chain.configstore'
 
 
 export default { 
+  RunosChainConfigstore: load(RunosChainConfigstore, 'runos_chain.configstore'),
   
 }
 
