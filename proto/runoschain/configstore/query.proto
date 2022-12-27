@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "runoschain/configstore/params.proto";
+import "runoschain/configstore/hosts_database.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "runos_chain/x/configstore/types";
@@ -15,7 +16,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/runos_chain/configstore/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a HostsDatabase by index.
+	rpc HostsDatabase(QueryGetHostsDatabaseRequest) returns (QueryGetHostsDatabaseResponse) {
+		option (google.api.http).get = "/runos_chain/configstore/hosts_database/{dpid}/{mac}";
+	}
+
+	// Queries a list of HostsDatabase items.
+	rpc HostsDatabaseAll(QueryAllHostsDatabaseRequest) returns (QueryAllHostsDatabaseResponse) {
+		option (google.api.http).get = "/runos_chain/configstore/hosts_database";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +36,25 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetHostsDatabaseRequest {
+	  string dpid = 1;
+  string mac = 2;
+
+}
+
+message QueryGetHostsDatabaseResponse {
+	HostsDatabase hostsDatabase = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHostsDatabaseRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHostsDatabaseResponse {
+	repeated HostsDatabase hostsDatabase = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

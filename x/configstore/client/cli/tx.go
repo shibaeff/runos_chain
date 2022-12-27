@@ -31,6 +31,9 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdSetPort())
+	cmd.AddCommand(CmdCreateHostsDatabase())
+	cmd.AddCommand(CmdUpdateHostsDatabase())
+	cmd.AddCommand(CmdDeleteHostsDatabase())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

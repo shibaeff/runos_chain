@@ -1,0 +1,12 @@
+syntax = "proto3";
+package runos_chain.configstore;
+
+option go_package = "runos_chain/x/configstore/types";
+
+message HostsDatabase {
+  string dpid = 1; 
+  string mac = 2; 
+  string inport = 3; 
+  string creator = 4;
+}
+

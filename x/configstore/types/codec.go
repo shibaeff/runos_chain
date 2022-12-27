@@ -9,12 +9,20 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgSetPort{}, "configstore/SetPort", nil)
+	cdc.RegisterConcrete(&MsgCreateHostsDatabase{}, "configstore/CreateHostsDatabase", nil)
+	cdc.RegisterConcrete(&MsgUpdateHostsDatabase{}, "configstore/UpdateHostsDatabase", nil)
+	cdc.RegisterConcrete(&MsgDeleteHostsDatabase{}, "configstore/DeleteHostsDatabase", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgSetPort{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateHostsDatabase{},
+		&MsgUpdateHostsDatabase{},
+		&MsgDeleteHostsDatabase{},
 	)
 	// this line is used by starport scaffolding # 3
 

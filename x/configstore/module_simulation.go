@@ -28,6 +28,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSetPort int = 100
 
+	opWeightMsgCreateHostsDatabase = "op_weight_msg_hosts_database"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateHostsDatabase int = 100
+
+	opWeightMsgUpdateHostsDatabase = "op_weight_msg_hosts_database"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateHostsDatabase int = 100
+
+	opWeightMsgDeleteHostsDatabase = "op_weight_msg_hosts_database"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteHostsDatabase int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -39,6 +51,18 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	configstoreGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
+		HostsDatabaseList: []types.HostsDatabase{
+			{
+				Creator: sample.AccAddress(),
+				Dpid:    "0",
+				Mac:     "0",
+			},
+			{
+				Creator: sample.AccAddress(),
+				Dpid:    "1",
+				Mac:     "1",
+			},
+		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&configstoreGenesis)
@@ -71,6 +95,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgSetPort,
 		configstoresimulation.SimulateMsgSetPort(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateHostsDatabase int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateHostsDatabase, &weightMsgCreateHostsDatabase, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateHostsDatabase = defaultWeightMsgCreateHostsDatabase
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateHostsDatabase,
+		configstoresimulation.SimulateMsgCreateHostsDatabase(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateHostsDatabase int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateHostsDatabase, &weightMsgUpdateHostsDatabase, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateHostsDatabase = defaultWeightMsgUpdateHostsDatabase
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateHostsDatabase,
+		configstoresimulation.SimulateMsgUpdateHostsDatabase(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteHostsDatabase int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteHostsDatabase, &weightMsgDeleteHostsDatabase, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteHostsDatabase = defaultWeightMsgDeleteHostsDatabase
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteHostsDatabase,
+		configstoresimulation.SimulateMsgDeleteHostsDatabase(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

@@ -1,6 +1,7 @@
 syntax = "proto3";
 package runos_chain.configstore;
 
+import "runoschain/configstore/hosts_database.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "runos_chain/x/configstore/types";
@@ -8,6 +9,9 @@ option go_package = "runos_chain/x/configstore/types";
 // Msg defines the Msg service.
 service Msg {
       rpc SetPort(MsgSetPort) returns (MsgSetPortResponse);
+  rpc CreateHostsDatabase(MsgCreateHostsDatabase) returns (MsgCreateHostsDatabaseResponse);
+  rpc UpdateHostsDatabase(MsgUpdateHostsDatabase) returns (MsgUpdateHostsDatabaseResponse);
+  rpc DeleteHostsDatabase(MsgDeleteHostsDatabase) returns (MsgDeleteHostsDatabaseResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -20,5 +24,30 @@ message MsgSetPort {
 
 message MsgSetPortResponse {
 }
+
+message MsgCreateHostsDatabase {
+  string creator = 1;
+  string dpid = 2;
+  string mac = 3;
+
+  string inport = 4;
+}
+message MsgCreateHostsDatabaseResponse {}
+
+message MsgUpdateHostsDatabase {
+  string creator = 1;
+  string dpid = 2;
+  string mac = 3;
+
+  string inport = 4;
+}
+message MsgUpdateHostsDatabaseResponse {}
+
+message MsgDeleteHostsDatabase {
+  string creator = 1;
+  string dpid = 2;
+  string mac = 3;
+}
+message MsgDeleteHostsDatabaseResponse {}
 
 // this line is used by starport scaffolding # proto/tx/message

@@ -131,30 +131,347 @@ func (m *MsgSetPortResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgSetPortResponse proto.InternalMessageInfo
 
+type MsgCreateHostsDatabase struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Dpid    string `protobuf:"bytes,2,opt,name=dpid,proto3" json:"dpid,omitempty"`
+	Mac     string `protobuf:"bytes,3,opt,name=mac,proto3" json:"mac,omitempty"`
+	Inport  string `protobuf:"bytes,4,opt,name=inport,proto3" json:"inport,omitempty"`
+}
+
+func (m *MsgCreateHostsDatabase) Reset()         { *m = MsgCreateHostsDatabase{} }
+func (m *MsgCreateHostsDatabase) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateHostsDatabase) ProtoMessage()    {}
+func (*MsgCreateHostsDatabase) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c674ca398ff72067, []int{2}
+}
+func (m *MsgCreateHostsDatabase) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCreateHostsDatabase) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCreateHostsDatabase.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCreateHostsDatabase) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateHostsDatabase.Merge(m, src)
+}
+func (m *MsgCreateHostsDatabase) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCreateHostsDatabase) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateHostsDatabase.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCreateHostsDatabase proto.InternalMessageInfo
+
+func (m *MsgCreateHostsDatabase) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgCreateHostsDatabase) GetDpid() string {
+	if m != nil {
+		return m.Dpid
+	}
+	return ""
+}
+
+func (m *MsgCreateHostsDatabase) GetMac() string {
+	if m != nil {
+		return m.Mac
+	}
+	return ""
+}
+
+func (m *MsgCreateHostsDatabase) GetInport() string {
+	if m != nil {
+		return m.Inport
+	}
+	return ""
+}
+
+type MsgCreateHostsDatabaseResponse struct {
+}
+
+func (m *MsgCreateHostsDatabaseResponse) Reset()         { *m = MsgCreateHostsDatabaseResponse{} }
+func (m *MsgCreateHostsDatabaseResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateHostsDatabaseResponse) ProtoMessage()    {}
+func (*MsgCreateHostsDatabaseResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c674ca398ff72067, []int{3}
+}
+func (m *MsgCreateHostsDatabaseResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCreateHostsDatabaseResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCreateHostsDatabaseResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCreateHostsDatabaseResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateHostsDatabaseResponse.Merge(m, src)
+}
+func (m *MsgCreateHostsDatabaseResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCreateHostsDatabaseResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateHostsDatabaseResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCreateHostsDatabaseResponse proto.InternalMessageInfo
+
+type MsgUpdateHostsDatabase struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Dpid    string `protobuf:"bytes,2,opt,name=dpid,proto3" json:"dpid,omitempty"`
+	Mac     string `protobuf:"bytes,3,opt,name=mac,proto3" json:"mac,omitempty"`
+	Inport  string `protobuf:"bytes,4,opt,name=inport,proto3" json:"inport,omitempty"`
+}
+
+func (m *MsgUpdateHostsDatabase) Reset()         { *m = MsgUpdateHostsDatabase{} }
+func (m *MsgUpdateHostsDatabase) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateHostsDatabase) ProtoMessage()    {}
+func (*MsgUpdateHostsDatabase) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c674ca398ff72067, []int{4}
+}
+func (m *MsgUpdateHostsDatabase) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgUpdateHostsDatabase) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgUpdateHostsDatabase.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgUpdateHostsDatabase) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateHostsDatabase.Merge(m, src)
+}
+func (m *MsgUpdateHostsDatabase) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgUpdateHostsDatabase) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateHostsDatabase.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgUpdateHostsDatabase proto.InternalMessageInfo
+
+func (m *MsgUpdateHostsDatabase) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgUpdateHostsDatabase) GetDpid() string {
+	if m != nil {
+		return m.Dpid
+	}
+	return ""
+}
+
+func (m *MsgUpdateHostsDatabase) GetMac() string {
+	if m != nil {
+		return m.Mac
+	}
+	return ""
+}
+
+func (m *MsgUpdateHostsDatabase) GetInport() string {
+	if m != nil {
+		return m.Inport
+	}
+	return ""
+}
+
+type MsgUpdateHostsDatabaseResponse struct {
+}
+
+func (m *MsgUpdateHostsDatabaseResponse) Reset()         { *m = MsgUpdateHostsDatabaseResponse{} }
+func (m *MsgUpdateHostsDatabaseResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateHostsDatabaseResponse) ProtoMessage()    {}
+func (*MsgUpdateHostsDatabaseResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c674ca398ff72067, []int{5}
+}
+func (m *MsgUpdateHostsDatabaseResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgUpdateHostsDatabaseResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgUpdateHostsDatabaseResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgUpdateHostsDatabaseResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateHostsDatabaseResponse.Merge(m, src)
+}
+func (m *MsgUpdateHostsDatabaseResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgUpdateHostsDatabaseResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateHostsDatabaseResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgUpdateHostsDatabaseResponse proto.InternalMessageInfo
+
+type MsgDeleteHostsDatabase struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Dpid    string `protobuf:"bytes,2,opt,name=dpid,proto3" json:"dpid,omitempty"`
+	Mac     string `protobuf:"bytes,3,opt,name=mac,proto3" json:"mac,omitempty"`
+}
+
+func (m *MsgDeleteHostsDatabase) Reset()         { *m = MsgDeleteHostsDatabase{} }
+func (m *MsgDeleteHostsDatabase) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteHostsDatabase) ProtoMessage()    {}
+func (*MsgDeleteHostsDatabase) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c674ca398ff72067, []int{6}
+}
+func (m *MsgDeleteHostsDatabase) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgDeleteHostsDatabase) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgDeleteHostsDatabase.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgDeleteHostsDatabase) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteHostsDatabase.Merge(m, src)
+}
+func (m *MsgDeleteHostsDatabase) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgDeleteHostsDatabase) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteHostsDatabase.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgDeleteHostsDatabase proto.InternalMessageInfo
+
+func (m *MsgDeleteHostsDatabase) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgDeleteHostsDatabase) GetDpid() string {
+	if m != nil {
+		return m.Dpid
+	}
+	return ""
+}
+
+func (m *MsgDeleteHostsDatabase) GetMac() string {
+	if m != nil {
+		return m.Mac
+	}
+	return ""
+}
+
+type MsgDeleteHostsDatabaseResponse struct {
+}
+
+func (m *MsgDeleteHostsDatabaseResponse) Reset()         { *m = MsgDeleteHostsDatabaseResponse{} }
+func (m *MsgDeleteHostsDatabaseResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteHostsDatabaseResponse) ProtoMessage()    {}
+func (*MsgDeleteHostsDatabaseResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_c674ca398ff72067, []int{7}
+}
+func (m *MsgDeleteHostsDatabaseResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgDeleteHostsDatabaseResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgDeleteHostsDatabaseResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgDeleteHostsDatabaseResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteHostsDatabaseResponse.Merge(m, src)
+}
+func (m *MsgDeleteHostsDatabaseResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgDeleteHostsDatabaseResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteHostsDatabaseResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgDeleteHostsDatabaseResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgSetPort)(nil), "runos_chain.configstore.MsgSetPort")
 	proto.RegisterType((*MsgSetPortResponse)(nil), "runos_chain.configstore.MsgSetPortResponse")
+	proto.RegisterType((*MsgCreateHostsDatabase)(nil), "runos_chain.configstore.MsgCreateHostsDatabase")
+	proto.RegisterType((*MsgCreateHostsDatabaseResponse)(nil), "runos_chain.configstore.MsgCreateHostsDatabaseResponse")
+	proto.RegisterType((*MsgUpdateHostsDatabase)(nil), "runos_chain.configstore.MsgUpdateHostsDatabase")
+	proto.RegisterType((*MsgUpdateHostsDatabaseResponse)(nil), "runos_chain.configstore.MsgUpdateHostsDatabaseResponse")
+	proto.RegisterType((*MsgDeleteHostsDatabase)(nil), "runos_chain.configstore.MsgDeleteHostsDatabase")
+	proto.RegisterType((*MsgDeleteHostsDatabaseResponse)(nil), "runos_chain.configstore.MsgDeleteHostsDatabaseResponse")
 }
 
 func init() { proto.RegisterFile("runoschain/configstore/tx.proto", fileDescriptor_c674ca398ff72067) }
 
 var fileDescriptor_c674ca398ff72067 = []byte{
-	// 230 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2f, 0x2a, 0xcd, 0xcb,
-	0x2f, 0x4e, 0xce, 0x48, 0xcc, 0xcc, 0xd3, 0x4f, 0xce, 0xcf, 0x4b, 0xcb, 0x4c, 0x2f, 0x2e, 0xc9,
-	0x2f, 0x4a, 0xd5, 0x2f, 0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x07, 0x2b, 0x88,
-	0x07, 0xab, 0xd0, 0x43, 0x52, 0xa1, 0x94, 0xc2, 0xc5, 0xe5, 0x5b, 0x9c, 0x1e, 0x9c, 0x5a, 0x12,
-	0x90, 0x5f, 0x54, 0x22, 0x24, 0xc1, 0xc5, 0x9e, 0x5c, 0x94, 0x9a, 0x58, 0x92, 0x5f, 0x24, 0xc1,
-	0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0x04, 0xe3, 0x0a, 0x09, 0x71, 0xb1, 0xa4, 0x14, 0x64, 0xa6, 0x48,
-	0x30, 0x81, 0x85, 0xc1, 0x6c, 0x21, 0x01, 0x2e, 0xe6, 0xdc, 0xc4, 0x64, 0x09, 0x66, 0xb0, 0x10,
-	0x88, 0x29, 0x24, 0xc6, 0xc5, 0x96, 0x99, 0x57, 0x90, 0x5f, 0x54, 0x22, 0xc1, 0x02, 0x16, 0x84,
-	0xf2, 0x94, 0x44, 0xb8, 0x84, 0x10, 0xb6, 0x04, 0xa5, 0x16, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x1a,
-	0x25, 0x71, 0x31, 0xfb, 0x16, 0xa7, 0x0b, 0x45, 0x73, 0xb1, 0xc3, 0xec, 0x57, 0xd6, 0xc3, 0xe1,
-	0x4e, 0x3d, 0x84, 0x76, 0x29, 0x6d, 0x22, 0x14, 0xc1, 0xec, 0x70, 0xb2, 0x3c, 0xf1, 0x48, 0x8e,
-	0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58,
-	0x8e, 0xe1, 0xc6, 0x63, 0x39, 0x86, 0x28, 0x79, 0x24, 0x53, 0xf4, 0x2b, 0x50, 0x83, 0xad, 0xb2,
-	0x20, 0xb5, 0x38, 0x89, 0x0d, 0x1c, 0x74, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x5b, 0x9d,
-	0x7e, 0x8a, 0x5d, 0x01, 0x00, 0x00,
+	// 352 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x94, 0x41, 0x4b, 0xc3, 0x30,
+	0x14, 0xc7, 0x57, 0x3b, 0x36, 0x7c, 0x27, 0x89, 0x32, 0xcb, 0x0e, 0xd9, 0x98, 0x17, 0x61, 0xd0,
+	0x82, 0x1e, 0xc4, 0xab, 0xee, 0xe0, 0x65, 0x20, 0x13, 0x41, 0xf4, 0x30, 0xb2, 0x36, 0x76, 0x05,
+	0x6d, 0x42, 0x12, 0x61, 0x9e, 0xfc, 0x0a, 0x7e, 0x2c, 0x8f, 0x3b, 0x7a, 0x94, 0x15, 0xbf, 0x87,
+	0x34, 0xb6, 0xae, 0x4a, 0x16, 0x14, 0xd4, 0x5b, 0xf2, 0x78, 0xff, 0xf7, 0xff, 0xc1, 0xff, 0xf1,
+	0xa0, 0x23, 0xee, 0x52, 0x26, 0xc3, 0x29, 0x49, 0xd2, 0x20, 0x64, 0xe9, 0x75, 0x12, 0x4b, 0xc5,
+	0x04, 0x0d, 0xd4, 0xcc, 0xe7, 0x82, 0x29, 0x86, 0xb6, 0x75, 0xc3, 0x58, 0x77, 0xf8, 0x95, 0x8e,
+	0x76, 0x7f, 0x85, 0x72, 0xca, 0xa4, 0x92, 0xe3, 0x88, 0x28, 0x32, 0x21, 0x92, 0xbe, 0x4f, 0xe9,
+	0x45, 0x00, 0x43, 0x19, 0x9f, 0x51, 0x75, 0xca, 0x84, 0x42, 0x1e, 0x34, 0x43, 0x41, 0x89, 0x62,
+	0xc2, 0x73, 0xba, 0xce, 0xee, 0xfa, 0xa8, 0xfc, 0x22, 0x04, 0xf5, 0x88, 0x27, 0x91, 0xb7, 0xa6,
+	0xcb, 0xfa, 0x8d, 0x36, 0xc0, 0xbd, 0x25, 0xa1, 0xe7, 0xea, 0x52, 0xfe, 0x44, 0x2d, 0x68, 0x24,
+	0x29, 0x67, 0x42, 0x79, 0x75, 0x5d, 0x2c, 0x7e, 0xbd, 0x2d, 0x40, 0x4b, 0x97, 0x11, 0x95, 0x9c,
+	0xa5, 0x92, 0xf6, 0x38, 0xb4, 0x86, 0x32, 0x3e, 0xce, 0x1d, 0xe8, 0x49, 0x0e, 0x37, 0x28, 0xd8,
+	0xfe, 0x8c, 0xa3, 0x0b, 0xd8, 0xec, 0xf8, 0x85, 0xe9, 0x9c, 0x47, 0xff, 0xcc, 0x64, 0x70, 0xfc,
+	0x60, 0xba, 0xd0, 0x4c, 0x03, 0x7a, 0x43, 0x7f, 0x99, 0xa9, 0xf0, 0x36, 0x4c, 0x2e, 0xbd, 0xf7,
+	0x5e, 0x5d, 0x70, 0x87, 0x32, 0x46, 0x57, 0xd0, 0x2c, 0x97, 0x64, 0xc7, 0x5f, 0xb1, 0x79, 0xfe,
+	0x32, 0xe3, 0x76, 0xff, 0x1b, 0x4d, 0xa5, 0x09, 0x7a, 0x80, 0x4d, 0xd3, 0x16, 0x04, 0xb6, 0x19,
+	0x06, 0x41, 0xfb, 0xe0, 0x87, 0x82, 0x2a, 0x80, 0x29, 0x72, 0x2b, 0x80, 0x41, 0x60, 0x07, 0xb0,
+	0x44, 0x9c, 0x03, 0x98, 0xf2, 0xb5, 0x02, 0x18, 0x04, 0x76, 0x00, 0x4b, 0xce, 0x47, 0x87, 0x4f,
+	0x0b, 0xec, 0xcc, 0x17, 0xd8, 0x79, 0x59, 0x60, 0xe7, 0x31, 0xc3, 0xb5, 0x79, 0x86, 0x6b, 0xcf,
+	0x19, 0xae, 0x5d, 0x76, 0x2a, 0x13, 0x83, 0xd9, 0xe7, 0x5b, 0x74, 0xcf, 0xa9, 0x9c, 0x34, 0xf4,
+	0x25, 0xd9, 0x7f, 0x0b, 0x00, 0x00, 0xff, 0xff, 0xa5, 0x2f, 0x54, 0xf5, 0xb2, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -170,6 +487,9 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	SetPort(ctx context.Context, in *MsgSetPort, opts ...grpc.CallOption) (*MsgSetPortResponse, error)
+	CreateHostsDatabase(ctx context.Context, in *MsgCreateHostsDatabase, opts ...grpc.CallOption) (*MsgCreateHostsDatabaseResponse, error)
+	UpdateHostsDatabase(ctx context.Context, in *MsgUpdateHostsDatabase, opts ...grpc.CallOption) (*MsgUpdateHostsDatabaseResponse, error)
+	DeleteHostsDatabase(ctx context.Context, in *MsgDeleteHostsDatabase, opts ...grpc.CallOption) (*MsgDeleteHostsDatabaseResponse, error)
 }
 
 type msgClient struct {
@@ -189,9 +509,39 @@ func (c *msgClient) SetPort(ctx context.Context, in *MsgSetPort, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *msgClient) CreateHostsDatabase(ctx context.Context, in *MsgCreateHostsDatabase, opts ...grpc.CallOption) (*MsgCreateHostsDatabaseResponse, error) {
+	out := new(MsgCreateHostsDatabaseResponse)
+	err := c.cc.Invoke(ctx, "/runos_chain.configstore.Msg/CreateHostsDatabase", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) UpdateHostsDatabase(ctx context.Context, in *MsgUpdateHostsDatabase, opts ...grpc.CallOption) (*MsgUpdateHostsDatabaseResponse, error) {
+	out := new(MsgUpdateHostsDatabaseResponse)
+	err := c.cc.Invoke(ctx, "/runos_chain.configstore.Msg/UpdateHostsDatabase", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) DeleteHostsDatabase(ctx context.Context, in *MsgDeleteHostsDatabase, opts ...grpc.CallOption) (*MsgDeleteHostsDatabaseResponse, error) {
+	out := new(MsgDeleteHostsDatabaseResponse)
+	err := c.cc.Invoke(ctx, "/runos_chain.configstore.Msg/DeleteHostsDatabase", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	SetPort(context.Context, *MsgSetPort) (*MsgSetPortResponse, error)
+	CreateHostsDatabase(context.Context, *MsgCreateHostsDatabase) (*MsgCreateHostsDatabaseResponse, error)
+	UpdateHostsDatabase(context.Context, *MsgUpdateHostsDatabase) (*MsgUpdateHostsDatabaseResponse, error)
+	DeleteHostsDatabase(context.Context, *MsgDeleteHostsDatabase) (*MsgDeleteHostsDatabaseResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -200,6 +550,15 @@ type UnimplementedMsgServer struct {
 
 func (*UnimplementedMsgServer) SetPort(ctx context.Context, req *MsgSetPort) (*MsgSetPortResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetPort not implemented")
+}
+func (*UnimplementedMsgServer) CreateHostsDatabase(ctx context.Context, req *MsgCreateHostsDatabase) (*MsgCreateHostsDatabaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateHostsDatabase not implemented")
+}
+func (*UnimplementedMsgServer) UpdateHostsDatabase(ctx context.Context, req *MsgUpdateHostsDatabase) (*MsgUpdateHostsDatabaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateHostsDatabase not implemented")
+}
+func (*UnimplementedMsgServer) DeleteHostsDatabase(ctx context.Context, req *MsgDeleteHostsDatabase) (*MsgDeleteHostsDatabaseResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteHostsDatabase not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -224,6 +583,60 @@ func _Msg_SetPort_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateHostsDatabase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateHostsDatabase)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateHostsDatabase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/runos_chain.configstore.Msg/CreateHostsDatabase",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateHostsDatabase(ctx, req.(*MsgCreateHostsDatabase))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_UpdateHostsDatabase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateHostsDatabase)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).UpdateHostsDatabase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/runos_chain.configstore.Msg/UpdateHostsDatabase",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).UpdateHostsDatabase(ctx, req.(*MsgUpdateHostsDatabase))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_DeleteHostsDatabase_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteHostsDatabase)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeleteHostsDatabase(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/runos_chain.configstore.Msg/DeleteHostsDatabase",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeleteHostsDatabase(ctx, req.(*MsgDeleteHostsDatabase))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "runos_chain.configstore.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -231,6 +644,18 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetPort",
 			Handler:    _Msg_SetPort_Handler,
+		},
+		{
+			MethodName: "CreateHostsDatabase",
+			Handler:    _Msg_CreateHostsDatabase_Handler,
+		},
+		{
+			MethodName: "UpdateHostsDatabase",
+			Handler:    _Msg_UpdateHostsDatabase_Handler,
+		},
+		{
+			MethodName: "DeleteHostsDatabase",
+			Handler:    _Msg_DeleteHostsDatabase_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -311,6 +736,221 @@ func (m *MsgSetPortResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgCreateHostsDatabase) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCreateHostsDatabase) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCreateHostsDatabase) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Inport) > 0 {
+		i -= len(m.Inport)
+		copy(dAtA[i:], m.Inport)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Inport)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Mac) > 0 {
+		i -= len(m.Mac)
+		copy(dAtA[i:], m.Mac)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Mac)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Dpid) > 0 {
+		i -= len(m.Dpid)
+		copy(dAtA[i:], m.Dpid)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Dpid)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgCreateHostsDatabaseResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCreateHostsDatabaseResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCreateHostsDatabaseResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgUpdateHostsDatabase) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgUpdateHostsDatabase) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgUpdateHostsDatabase) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Inport) > 0 {
+		i -= len(m.Inport)
+		copy(dAtA[i:], m.Inport)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Inport)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Mac) > 0 {
+		i -= len(m.Mac)
+		copy(dAtA[i:], m.Mac)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Mac)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Dpid) > 0 {
+		i -= len(m.Dpid)
+		copy(dAtA[i:], m.Dpid)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Dpid)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgUpdateHostsDatabaseResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgUpdateHostsDatabaseResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgUpdateHostsDatabaseResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgDeleteHostsDatabase) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgDeleteHostsDatabase) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgDeleteHostsDatabase) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Mac) > 0 {
+		i -= len(m.Mac)
+		copy(dAtA[i:], m.Mac)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Mac)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Dpid) > 0 {
+		i -= len(m.Dpid)
+		copy(dAtA[i:], m.Dpid)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Dpid)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgDeleteHostsDatabaseResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgDeleteHostsDatabaseResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgDeleteHostsDatabaseResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -348,6 +988,104 @@ func (m *MsgSetPort) Size() (n int) {
 }
 
 func (m *MsgSetPortResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgCreateHostsDatabase) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Dpid)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Mac)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Inport)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgCreateHostsDatabaseResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgUpdateHostsDatabase) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Dpid)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Mac)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Inport)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgUpdateHostsDatabaseResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgDeleteHostsDatabase) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Dpid)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Mac)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgDeleteHostsDatabaseResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -567,6 +1305,658 @@ func (m *MsgSetPortResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgSetPortResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCreateHostsDatabase) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCreateHostsDatabase: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCreateHostsDatabase: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Dpid", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Dpid = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Mac", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Mac = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Inport", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Inport = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCreateHostsDatabaseResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCreateHostsDatabaseResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCreateHostsDatabaseResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgUpdateHostsDatabase) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgUpdateHostsDatabase: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgUpdateHostsDatabase: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Dpid", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Dpid = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Mac", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Mac = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Inport", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Inport = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgUpdateHostsDatabaseResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgUpdateHostsDatabaseResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgUpdateHostsDatabaseResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgDeleteHostsDatabase) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgDeleteHostsDatabase: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgDeleteHostsDatabase: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Dpid", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Dpid = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Mac", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Mac = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgDeleteHostsDatabaseResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgDeleteHostsDatabaseResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgDeleteHostsDatabaseResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

@@ -7,10 +7,19 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
+import { MsgCreateHostsDatabase } from "./types/runoschain/configstore/tx";
 import { MsgSetPort } from "./types/runoschain/configstore/tx";
+import { MsgUpdateHostsDatabase } from "./types/runoschain/configstore/tx";
+import { MsgDeleteHostsDatabase } from "./types/runoschain/configstore/tx";
 
 
-export { MsgSetPort };
+export { MsgCreateHostsDatabase, MsgSetPort, MsgUpdateHostsDatabase, MsgDeleteHostsDatabase };
+
+type sendMsgCreateHostsDatabaseParams = {
+  value: MsgCreateHostsDatabase,
+  fee?: StdFee,
+  memo?: string
+};
 
 type sendMsgSetPortParams = {
   value: MsgSetPort,
@@ -18,9 +27,33 @@ type sendMsgSetPortParams = {
   memo?: string
 };
 
+type sendMsgUpdateHostsDatabaseParams = {
+  value: MsgUpdateHostsDatabase,
+  fee?: StdFee,
+  memo?: string
+};
+
+type sendMsgDeleteHostsDatabaseParams = {
+  value: MsgDeleteHostsDatabase,
+  fee?: StdFee,
+  memo?: string
+};
+
+
+type msgCreateHostsDatabaseParams = {
+  value: MsgCreateHostsDatabase,
+};
 
 type msgSetPortParams = {
   value: MsgSetPort,
+};
+
+type msgUpdateHostsDatabaseParams = {
+  value: MsgUpdateHostsDatabase,
+};
+
+type msgDeleteHostsDatabaseParams = {
+  value: MsgDeleteHostsDatabase,
 };
 
 
@@ -41,6 +74,20 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
+		async sendMsgCreateHostsDatabase({ value, fee, memo }: sendMsgCreateHostsDatabaseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgCreateHostsDatabase: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgCreateHostsDatabase({ value: MsgCreateHostsDatabase.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgCreateHostsDatabase: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
 		async sendMsgSetPort({ value, fee, memo }: sendMsgSetPortParams): Promise<DeliverTxResponse> {
 			if (!signer) {
 					throw new Error('TxClient:sendMsgSetPort: Unable to sign Tx. Signer is not present.')
@@ -55,12 +102,64 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 			}
 		},
 		
+		async sendMsgUpdateHostsDatabase({ value, fee, memo }: sendMsgUpdateHostsDatabaseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgUpdateHostsDatabase: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgUpdateHostsDatabase({ value: MsgUpdateHostsDatabase.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgUpdateHostsDatabase: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		async sendMsgDeleteHostsDatabase({ value, fee, memo }: sendMsgDeleteHostsDatabaseParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgDeleteHostsDatabase: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgDeleteHostsDatabase({ value: MsgDeleteHostsDatabase.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgDeleteHostsDatabase: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		
+		msgCreateHostsDatabase({ value }: msgCreateHostsDatabaseParams): EncodeObject {
+			try {
+				return { typeUrl: "/runos_chain.configstore.MsgCreateHostsDatabase", value: MsgCreateHostsDatabase.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgCreateHostsDatabase: Could not create message: ' + e.message)
+			}
+		},
 		
 		msgSetPort({ value }: msgSetPortParams): EncodeObject {
 			try {
 				return { typeUrl: "/runos_chain.configstore.MsgSetPort", value: MsgSetPort.fromPartial( value ) }  
 			} catch (e: any) {
 				throw new Error('TxClient:MsgSetPort: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgUpdateHostsDatabase({ value }: msgUpdateHostsDatabaseParams): EncodeObject {
+			try {
+				return { typeUrl: "/runos_chain.configstore.MsgUpdateHostsDatabase", value: MsgUpdateHostsDatabase.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgUpdateHostsDatabase: Could not create message: ' + e.message)
+			}
+		},
+		
+		msgDeleteHostsDatabase({ value }: msgDeleteHostsDatabaseParams): EncodeObject {
+			try {
+				return { typeUrl: "/runos_chain.configstore.MsgDeleteHostsDatabase", value: MsgDeleteHostsDatabase.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgDeleteHostsDatabase: Could not create message: ' + e.message)
 			}
 		},
 		

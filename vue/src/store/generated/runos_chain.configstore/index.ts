@@ -1,9 +1,10 @@
 import { Client, registry, MissingWalletError } from 'runos_chain-client-ts'
 
+import { HostsDatabase } from "runos_chain-client-ts/runos_chain.configstore/types"
 import { Params } from "runos_chain-client-ts/runos_chain.configstore/types"
 
 
-export { Params };
+export { HostsDatabase, Params };
 
 function initClient(vuexGetters) {
 	return new Client(vuexGetters['common/env/getEnv'], vuexGetters['common/wallet/signer'])
@@ -35,8 +36,11 @@ function getStructure(template) {
 const getDefaultState = () => {
 	return {
 				Params: {},
+				HostsDatabase: {},
+				HostsDatabaseAll: {},
 				
 				_Structure: {
+						HostsDatabase: getStructure(HostsDatabase.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						
 		},
@@ -71,6 +75,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.Params[JSON.stringify(params)] ?? {}
+		},
+				getHostsDatabase: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HostsDatabase[JSON.stringify(params)] ?? {}
+		},
+				getHostsDatabaseAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.HostsDatabaseAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -128,6 +144,54 @@ export default {
 		},
 		
 		
+		
+		
+		 		
+		
+		
+		async QueryHostsDatabase({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.RunosChainConfigstore.query.queryHostsDatabase( key.dpid,  key.mac)).data
+				
+					
+				commit('QUERY', { query: 'HostsDatabase', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHostsDatabase', payload: { options: { all }, params: {...key},query }})
+				return getters['getHostsDatabase']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHostsDatabase API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryHostsDatabaseAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const client = initClient(rootGetters);
+				let value= (await client.RunosChainConfigstore.query.queryHostsDatabaseAll(query ?? undefined)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await client.RunosChainConfigstore.query.queryHostsDatabaseAll({...query ?? {}, 'pagination.key':(<any> value).pagination.next_key} as any)).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'HostsDatabaseAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryHostsDatabaseAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getHostsDatabaseAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryHostsDatabaseAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
 		async sendMsgSetPort({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const client=await initClient(rootGetters)
@@ -138,6 +202,45 @@ export default {
 					throw new Error('TxClient:MsgSetPort:Init Could not initialize signing client. Wallet is required.')
 				}else{
 					throw new Error('TxClient:MsgSetPort:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgDeleteHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const client=await initClient(rootGetters)
+				const result = await client.RunosChainConfigstore.tx.sendMsgDeleteHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgDeleteHostsDatabase:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const client=await initClient(rootGetters)
+				const result = await client.RunosChainConfigstore.tx.sendMsgUpdateHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgCreateHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const client=await initClient(rootGetters)
+				const result = await client.RunosChainConfigstore.tx.sendMsgCreateHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateHostsDatabase:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -152,6 +255,45 @@ export default {
 					throw new Error('TxClient:MsgSetPort:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgSetPort:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgDeleteHostsDatabase({ rootGetters }, { value }) {
+			try {
+				const client=initClient(rootGetters)
+				const msg = await client.RunosChainConfigstore.tx.msgDeleteHostsDatabase({value})
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteHostsDatabase:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgUpdateHostsDatabase({ rootGetters }, { value }) {
+			try {
+				const client=initClient(rootGetters)
+				const msg = await client.RunosChainConfigstore.tx.msgUpdateHostsDatabase({value})
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgCreateHostsDatabase({ rootGetters }, { value }) {
+			try {
+				const client=initClient(rootGetters)
+				const msg = await client.RunosChainConfigstore.tx.msgCreateHostsDatabase({value})
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateHostsDatabase:Create Could not create message: ' + e.message)
 				}
 			}
 		},
