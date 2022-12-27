@@ -9,6 +9,8 @@
  * ---------------------------------------------------------------
  */
 
+export type ConfigstoreMsgSetPortResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */

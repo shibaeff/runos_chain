@@ -7,10 +7,21 @@ import { msgTypes } from './registry';
 import { IgniteClient } from "../client"
 import { MissingWalletError } from "../helpers"
 import { Api } from "./rest";
+import { MsgSetPort } from "./types/runoschain/configstore/tx";
 
 
-export {  };
+export { MsgSetPort };
 
+type sendMsgSetPortParams = {
+  value: MsgSetPort,
+  fee?: StdFee,
+  memo?: string
+};
+
+
+type msgSetPortParams = {
+  value: MsgSetPort,
+};
 
 
 export const registry = new Registry(msgTypes);
@@ -30,6 +41,28 @@ export const txClient = ({ signer, prefix, addr }: TxClientOptions = { addr: "ht
 
   return {
 		
+		async sendMsgSetPort({ value, fee, memo }: sendMsgSetPortParams): Promise<DeliverTxResponse> {
+			if (!signer) {
+					throw new Error('TxClient:sendMsgSetPort: Unable to sign Tx. Signer is not present.')
+			}
+			try {			
+				const { address } = (await signer.getAccounts())[0]; 
+				const signingClient = await SigningStargateClient.connectWithSigner(addr,signer,{registry, prefix});
+				let msg = this.msgSetPort({ value: MsgSetPort.fromPartial(value) })
+				return await signingClient.signAndBroadcast(address, [msg], fee ? fee : defaultFee, memo)
+			} catch (e: any) {
+				throw new Error('TxClient:sendMsgSetPort: Could not broadcast Tx: '+ e.message)
+			}
+		},
+		
+		
+		msgSetPort({ value }: msgSetPortParams): EncodeObject {
+			try {
+				return { typeUrl: "/runos_chain.configstore.MsgSetPort", value: MsgSetPort.fromPartial( value ) }  
+			} catch (e: any) {
+				throw new Error('TxClient:MsgSetPort: Could not create message: ' + e.message)
+			}
+		},
 		
 	}
 };
