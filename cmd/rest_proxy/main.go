@@ -4,24 +4,26 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
-	"log"
-	"net/http"
-	"net/url"
-
 	"github.com/gorilla/mux"
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
-
+	//types2 "github.com/tendermint/spn/x/launch/types"
+	"io"
+	"log"
+	"net/http"
+	//"github.com/cosmos/cosmos-sdk/client"
+	//"github.com/cosmos/cosmos-sdk/client/flags"
+	//"github.com/cosmos/cosmos-sdk/client/tx"
+	//"github.com/spf13/cobra"
 	"runos_chain/x/configstore/types"
 )
 
 const (
-	constGetPortPath = "/runos_chain/config_store/hosts_database/%s/%s"
+	constGetPortPath = "/runos_chain/configstore/hosts_database/%s/%s"
 )
 
 var (
-	chainRest string
+	chainRest = "localhost:1317"
 	addr      string
 	cosmos    cosmosclient.Client
 	account   cosmosaccount.Account
@@ -32,30 +34,36 @@ func errorHandler(w http.ResponseWriter, err error) {
 	w.Write([]byte(fmt.Sprintf("500 - error %s", err)))
 }
 
-func Init() {
-	chainRest = "localhost"
-	cosmos, err := cosmosclient.New(
-		context.Background(),
-	)
-	accountName := "Alice"
-	if err != nil {
-		log.Fatal(err)
-	}
-	account, err := cosmos.Account(accountName)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	addr, err = account.Address("")
-	if err != nil {
-		log.Fatal(err)
-	}
-}
+//func Init() {
+//	chainRest = "localhost"
+//	prefix := "cosmos"
+//	accountName := "alice"
+//	var ar types2.AccountRetriever
+//	cosmos, err := cosmosclient.New(
+//		context.Background(),
+//		cosmosclient.WithAddressPrefix(prefix),
+//		cosmosclient.WithAccountRetriever(ar),
+//	)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	account, err = cosmos.Account(accountName)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//
+//	addr, err = account.Address(prefix)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//}
 
 func GetPortHandler(w http.ResponseWriter, r *http.Request) {
 	dpid := r.URL.Query().Get("dpid")
 	mac := r.URL.Query().Get("mac")
-	path, _ := url.JoinPath(chainRest, fmt.Sprintf(constGetPortPath, dpid, mac))
+	path := chainRest + fmt.Sprintf(constGetPortPath, dpid, mac)
+	path = "http://" + path
+	fmt.Println(path)
 	resp, err := http.Get(path)
 	if err != nil {
 		errorHandler(w, err)
@@ -67,13 +75,48 @@ func GetPortHandler(w http.ResponseWriter, r *http.Request) {
 	resp.Body.Close()
 }
 
+/*
+Sample json
+
+	{
+		dpid: 0000000000000001,
+		mac: 00:00:5e:00:53:af,
+		inport: 345
+	}
+*/
 type SetPortRequest struct {
-	Dpid   string
-	Mac    string
-	Inport string
+	Dpid   string `json:"dpid"`
+	Mac    string `json:"mac"`
+	Inport string `json:"inport"`
 }
 
 func SetPortHandler(w http.ResponseWriter, r *http.Request) {
+	addressPrefix := "cosmos"
+
+	// Create a Cosmos client instance
+	cosmos, err := cosmosclient.New(
+		context.Background(),
+		cosmosclient.WithAddressPrefix(addressPrefix),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Account `alice` was initialized during `ignite chain serve`
+	accountName := "alice"
+
+	// Get account from the keyring
+	account, err := cosmos.Account(accountName)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	addr, err := account.Address(addressPrefix)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Define a message to create a post
 	s, err := io.ReadAll(r.Body)
 	if err != nil {
 		errorHandler(w, err)
@@ -97,6 +140,7 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	// Print response from broadcasting a transaction
 	fmt.Print("MsgCreatePost:\n\n")
 	fmt.Println(txResp)
@@ -104,8 +148,10 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// mux handlers
+	fmt.Println("Started")
 	r := mux.NewRouter()
 	r.HandleFunc("/getPort", GetPortHandler).Methods("GET")
 	r.HandleFunc("/setPort", SetPortHandler).Methods("POST")
 	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe(":8000", r))
 }
