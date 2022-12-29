@@ -128,7 +128,7 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 		errorHandler(w, err)
 		return
 	}
-	msg := &types.MsgSetPort{
+	msg := &types.MsgCreateHostsDatabase{
 		Creator: addr,
 		Dpid:    tuple.Dpid,
 		Mac:     tuple.Mac,
@@ -138,11 +138,11 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 	// to create a post store response in txResp
 	txResp, err := cosmos.BroadcastTx(context.Background(), account, msg)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 
 	// Print response from broadcasting a transaction
-	fmt.Print("MsgCreatePost:\n\n")
+	fmt.Print("MsgCreate:\n\n")
 	fmt.Println(txResp)
 }
 
