@@ -5,4 +5,4 @@ ENV LOCAL=/usr/local
 
 COPY build/checkersd-linux-${BUILDARCH} ${LOCAL}/bin/runos_chaind
 
-ENTRYPOINT [ "checkersd" ]
+ENTRYPOINT [ "runos_chaind" ]
