@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
@@ -84,11 +83,11 @@ Sample json
 		inport: 345
 	}
 */
-type SetPortRequest struct {
-	Dpid   string `json:"dpid"`
-	Mac    string `json:"mac"`
-	Inport string `json:"inport"`
-}
+//type SetPortRequest struct {
+//	Dpid   string `json:"dpid"`
+//	Mac    string `json:"mac"`
+//	Inport string `json:"inport"`
+//}
 
 func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 	addressPrefix := "cosmos"
@@ -117,22 +116,19 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Define a message to create a post
-	s, err := io.ReadAll(r.Body)
-	if err != nil {
-		errorHandler(w, err)
-		return
-	}
-	var tuple SetPortRequest
-	err = json.Unmarshal(s, &tuple)
-	if err != nil {
-		errorHandler(w, err)
-		return
-	}
+	//s, err := io.ReadAll(r.Body)
+	//if err != nil {
+	//	errorHandler(w, err)
+	//	return
+	//}
+	dpid := r.URL.Query().Get("dpid")
+	mac := r.URL.Query().Get("mac")
+	inport := r.URL.Query().Get("inport")
 	msg := &types.MsgCreateHostsDatabase{
 		Creator: addr,
-		Dpid:    tuple.Dpid,
-		Mac:     tuple.Mac,
-		Inport:  tuple.Inport,
+		Dpid:    dpid,
+		Mac:     mac,
+		Inport:  inport,
 	}
 	// Broadcast a transaction from account `alice` with the message
 	// to create a post store response in txResp
@@ -151,7 +147,7 @@ func main() {
 	fmt.Println("Started")
 	r := mux.NewRouter()
 	r.HandleFunc("/getPort", GetPortHandler).Methods("GET")
-	r.HandleFunc("/setPort", SetPortHandler).Methods("POST")
+	r.HandleFunc("/setPort", SetPortHandler).Methods("GET")
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":8000", r))
 }
