@@ -3,17 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
-	"github.com/ignite/cli/ignite/pkg/cosmosclient"
-	//types2 "github.com/tendermint/spn/x/launch/types"
 	"io"
 	"log"
 	"net/http"
-	//"github.com/cosmos/cosmos-sdk/client"
-	//"github.com/cosmos/cosmos-sdk/client/flags"
-	//"github.com/cosmos/cosmos-sdk/client/tx"
-	//"github.com/spf13/cobra"
+
+	"github.com/gorilla/mux"
+	"github.com/ignite/cli/ignite/pkg/cosmosaccount"
+	"github.com/ignite/cli/ignite/pkg/cosmosclient"
+
 	"runos_chain/x/configstore/types"
 )
 
@@ -73,22 +70,6 @@ func GetPortHandler(w http.ResponseWriter, r *http.Request) {
 	io.Copy(w, resp.Body)
 	resp.Body.Close()
 }
-
-/*
-Sample json
-
-	{
-		dpid: 0000000000000001,
-		mac: 00:00:5e:00:53:af,
-		inport: 345
-	}
-*/
-//type SetPortRequest struct {
-//	Dpid   string `json:"dpid"`
-//	Mac    string `json:"mac"`
-//	Inport string `json:"inport"`
-//}
-
 func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 	addressPrefix := "cosmos"
 
@@ -100,27 +81,15 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// Account `alice` was initialized during `ignite chain serve`
 	accountName := "alice"
-
-	// Get account from the keyring
 	account, err := cosmos.Account(accountName)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	addr, err := account.Address(addressPrefix)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// Define a message to create a post
-	//s, err := io.ReadAll(r.Body)
-	//if err != nil {
-	//	errorHandler(w, err)
-	//	return
-	//}
 	dpid := r.URL.Query().Get("dpid")
 	mac := r.URL.Query().Get("mac")
 	inport := r.URL.Query().Get("inport")
@@ -130,14 +99,10 @@ func SetPortHandler(w http.ResponseWriter, r *http.Request) {
 		Mac:     mac,
 		Inport:  inport,
 	}
-	// Broadcast a transaction from account `alice` with the message
-	// to create a post store response in txResp
 	txResp, err := cosmos.BroadcastTx(context.Background(), account, msg)
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	// Print response from broadcasting a transaction
 	fmt.Print("MsgCreate:\n\n")
 	fmt.Println(txResp)
 }
