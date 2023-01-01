@@ -3,6 +3,23 @@
 networking devices backed by the RUNOS SDN controller. The interaction between blockchain and RUNOS happens through the 
 special adapter.
 
+## Get started - docker
+
+```bash
+#build tmkms 
+docker build -f Dockerfile-ubuntu-tmkms . -t tmkms_i:v0.12.2
+
+# create volumes
+mkdir -p ~/docker/val-alice mkdir ~/docker/sentry-alice
+# init nodes
+echo -e sentry-alice'\n'val-alice \
+    | xargs -I {} \
+    docker run --rm -i \
+    -v $(pwd)/docker/{}:/root/.runos_chain \
+    runos_chaind_i \
+    init runos_chain
+```
+
 ## Get started
 
 ```

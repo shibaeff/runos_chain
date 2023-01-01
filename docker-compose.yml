@@ -1,15 +1,15 @@
 version: "3.9"
 services:
-#  runos_chaind:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile-runos_chaind
-#      args:
-#        - BUILDARCH=amd64
-#    ports:
-#      - "26657:26657"
-#      - "1317:1317"
-#      - "4500:4500"
+  runos_chaind:
+    build:
+      context: .
+      dockerfile: Dockerfile-runos_chaind
+      args:
+        - BUILDARCH=amd64
+    ports:
+      - "26657:26657"
+      - "1317:1317"
+      - "4500:4500"
   runos_chaind-rest:
     build:
       context: .
