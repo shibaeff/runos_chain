@@ -18,3 +18,6 @@ docker-build:
 		-w /runos_chain \
 		golang:1.18.7 \
 		make build-all
+
+clearn-docker-data:
+	for i in $(ls docker); do rm -rf docker/$i/data; done
