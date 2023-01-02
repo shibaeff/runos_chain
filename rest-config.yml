@@ -1,4 +1,4 @@
 runosChainApi: "localhost:1317"
 logLevel: "error"
 accountName: "alice"
-port: ":8000"
+port: ":6666"
