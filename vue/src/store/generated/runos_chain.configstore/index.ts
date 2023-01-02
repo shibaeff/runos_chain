@@ -221,16 +221,16 @@ export default {
 		},
 		
 		
-		async sendMsgUpdateHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgCreateHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const client=await initClient(rootGetters)
-				const result = await client.RunosChainConfigstore.tx.sendMsgUpdateHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
+				const result = await client.RunosChainConfigstore.tx.sendMsgCreateHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgCreateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgUpdateHostsDatabase:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgCreateHostsDatabase:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -247,16 +247,16 @@ export default {
 				}
 			}
 		},
-		async sendMsgCreateHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgUpdateHostsDatabase({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const client=await initClient(rootGetters)
-				const result = await client.RunosChainConfigstore.tx.sendMsgCreateHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
+				const result = await client.RunosChainConfigstore.tx.sendMsgUpdateHostsDatabase({ value, fee: {amount: fee, gas: "200000"}, memo })
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgCreateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgCreateHostsDatabase:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -274,16 +274,16 @@ export default {
 			}
 		},
 		
-		async MsgUpdateHostsDatabase({ rootGetters }, { value }) {
+		async MsgCreateHostsDatabase({ rootGetters }, { value }) {
 			try {
 				const client=initClient(rootGetters)
-				const msg = await client.RunosChainConfigstore.tx.msgUpdateHostsDatabase({value})
+				const msg = await client.RunosChainConfigstore.tx.msgCreateHostsDatabase({value})
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgUpdateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgCreateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgUpdateHostsDatabase:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgCreateHostsDatabase:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -300,16 +300,16 @@ export default {
 				}
 			}
 		},
-		async MsgCreateHostsDatabase({ rootGetters }, { value }) {
+		async MsgUpdateHostsDatabase({ rootGetters }, { value }) {
 			try {
 				const client=initClient(rootGetters)
-				const msg = await client.RunosChainConfigstore.tx.msgCreateHostsDatabase({value})
+				const msg = await client.RunosChainConfigstore.tx.msgUpdateHostsDatabase({value})
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgCreateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgCreateHostsDatabase:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgUpdateHostsDatabase:Create Could not create message: ' + e.message)
 				}
 			}
 		},

@@ -12,12 +12,8 @@ build-with-checksum: build-all do-checksum
 build-all-rest:
 	GOOS=linux GOARCH=amd64 go build -o ./build/runos_chaind-rest-linux-amd64 ./cmd/runos_chaind-rest
 
-docker-build:
-	docker run --rm -it \
-		-v /home/golanger/runos_chain:/runos_chain \
-		-w /runos_chain \
-		golang:1.18.7 \
-		make build-all
+docker-build-rest:
+	docker build -f Dockerfile-runos_chaind-rest . -t runos_chaind-rest:latest --build-arg BUILDARCH=amd64
 
 clearn-docker-data:
 	for i in $(ls docker); do rm -rf docker/$i/data; done

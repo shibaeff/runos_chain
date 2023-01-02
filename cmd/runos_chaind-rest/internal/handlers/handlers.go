@@ -44,9 +44,9 @@ func errorHandler(w http.ResponseWriter, err error) {
 
 func Init() {
 	logging.LoggerInit()
-	configPath := *flag.String("config", "rest-config.yml", "path to the config file")
+	configPath := flag.String("config", "rest-config.yml", "path to the config file")
 	flag.Parse()
-	file, err := os.Open(configPath)
+	file, err := os.Open(*configPath)
 	if err != nil {
 		panic(err)
 	}
@@ -75,6 +75,7 @@ func Init() {
 	logging.Logger.Debugf("Account name is %s", accountName)
 	account, err = cosmos.Account(accountName)
 	if err != nil {
+		fmt.Println("ok")
 		log.Fatal(err)
 	}
 	addr, err = account.Address(addressPrefix)
