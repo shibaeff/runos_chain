@@ -1,0 +1,1 @@
+./runos_chaind q configstore show-hosts-database 0000000000000001 0123456789AB

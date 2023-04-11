@@ -1,0 +1,1 @@
+curl "locahost:8000/getPort?dpid=0000000000000001&mac=00:00:5e:00:53:af"

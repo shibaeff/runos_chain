@@ -1,0 +1,1 @@
+curl http://localhost:1317/runos_chain/configstore/hosts_database/0000000000000001/0123456789AB
